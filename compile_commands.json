@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/louis/Projects/tec-flight-software",
+  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc  -o CMakeFiles/TecFlightSoftware.dir/src/Fdir.cpp.o -c /home/louis/Projects/tec-flight-software/src/Fdir.cpp",
+  "file": "/home/louis/Projects/tec-flight-software/src/Fdir.cpp",
+  "output": "CMakeFiles/TecFlightSoftware.dir/src/Fdir.cpp.o"
+},
+{
+  "directory": "/home/louis/Projects/tec-flight-software",
+  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc  -o CMakeFiles/TecFlightSoftware.dir/src/GnssSensor.cpp.o -c /home/louis/Projects/tec-flight-software/src/GnssSensor.cpp",
+  "file": "/home/louis/Projects/tec-flight-software/src/GnssSensor.cpp",
+  "output": "CMakeFiles/TecFlightSoftware.dir/src/GnssSensor.cpp.o"
+},
+{
+  "directory": "/home/louis/Projects/tec-flight-software",
+  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc  -o CMakeFiles/TecFlightSoftware.dir/src/ImuSensor.cpp.o -c /home/louis/Projects/tec-flight-software/src/ImuSensor.cpp",
+  "file": "/home/louis/Projects/tec-flight-software/src/ImuSensor.cpp",
+  "output": "CMakeFiles/TecFlightSoftware.dir/src/ImuSensor.cpp.o"
+},
+{
+  "directory": "/home/louis/Projects/tec-flight-software",
+  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc  -o CMakeFiles/TecFlightSoftware.dir/src/Processor.cpp.o -c /home/louis/Projects/tec-flight-software/src/Processor.cpp",
+  "file": "/home/louis/Projects/tec-flight-software/src/Processor.cpp",
+  "output": "CMakeFiles/TecFlightSoftware.dir/src/Processor.cpp.o"
+},
+{
+  "directory": "/home/louis/Projects/tec-flight-software",
+  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc  -o CMakeFiles/TecFlightSoftware.dir/src/main.cpp.o -c /home/louis/Projects/tec-flight-software/src/main.cpp",
+  "file": "/home/louis/Projects/tec-flight-software/src/main.cpp",
+  "output": "CMakeFiles/TecFlightSoftware.dir/src/main.cpp.o"
+}
+]
