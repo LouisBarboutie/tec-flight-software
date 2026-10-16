@@ -9,19 +9,6 @@
 #include "Processor.hpp"
 #include "Scheduler.hpp"
 
-class Component : public IComponent
-{
-  public:
-    Component(std::string_view name) { this->name = name; }
-    uint64_t Period() override { return 10; }
-    void Step() override { logging::Log(logging::Level::INFO, std::format("{}: Step {} ", this->name, this->steps++)); }
-    std::string_view Name() override { return this->name; }
-
-  private:
-    uint64_t steps{0};
-    std::string name;
-};
-
 int main(int argc, char *argv[])
 {
     logging::level = logging::Level::INFO;
