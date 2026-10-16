@@ -25,6 +25,7 @@ int main(void)
 
     scheduler.AddComponent(&component1);
     scheduler.AddComponent(&component2);
+    scheduler.AddComponent(&component2);
 
     scheduler.Run(100);
 

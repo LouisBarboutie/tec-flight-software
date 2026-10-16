@@ -1,5 +1,6 @@
 #include <cstdint>
 #include <queue>
+#include <set>
 #include <vector>
 #include <functional>
 
@@ -22,8 +23,10 @@ class Scheduler
     void Step();
     uint64_t CurrentTime();
     void AddComponent(IComponent *component);
+    const std::set<IComponent*>& Components();
 
   private:
     uint64_t millis{0};
     std::priority_queue<Event, std::vector<Event>, CompareTime> events{};
+    std::set<IComponent*> components;
 };

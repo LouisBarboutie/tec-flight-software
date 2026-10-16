@@ -29,5 +29,12 @@ uint64_t Scheduler::CurrentTime() { return this->millis; }
 
 void Scheduler::AddComponent(IComponent *component)
 {
+    // Duplicates are not allowed
+    if (this->components.contains(component))
+        return;
+
     this->events.push({.time = 0, .period = component->Period(), .action = std::bind(&IComponent::Step, component)});
+    this->components.insert(component);
 }
+
+const std::set<IComponent *> &Scheduler::Components() { return this->components; }
