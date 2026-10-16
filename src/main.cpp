@@ -1,8 +1,11 @@
 #include <cstdint>
-#include <iostream>
 #include <string_view>
 #include <format>
 
+#include "Fdir.hpp"
+#include "GnssSensor.hpp"
+#include "ImuSensor.hpp"
+#include "Processor.hpp"
 #include "Scheduler.hpp"
 #include "Logger.hpp"
 
@@ -23,13 +26,25 @@ int main(void)
 {
     logging::level = logging::Level::DEBUG;
 
-    Scheduler scheduler;
-    Component component1("Foo");
-    Component component2("Bar");
+    Processor processor("Processor");
+    ImuSensor imu1("IMU_1"), imu2("IMU_2"), imu3("IMU_3");
+    GnssSensor gnss1("GNSS_1"), gnss2("GNSS_2");
 
-    scheduler.AddComponent(&component1);
-    scheduler.AddComponent(&component2);
-    scheduler.AddComponent(&component2);
+    processor.imuSensors[0] = &imu1;
+    processor.imuSensors[1] = &imu2;
+    processor.imuSensors[2] = &imu3;
+
+    processor.gnssSensors[0] = &gnss1;
+    processor.gnssSensors[1] = &gnss2;
+
+    scheduler.AddComponent(&processor);
+    scheduler.AddComponent(&imu1);
+    scheduler.AddComponent(&imu2);
+    scheduler.AddComponent(&imu3);
+    scheduler.AddComponent(&gnss1);
+    scheduler.AddComponent(&gnss2);
+
+    scheduler.ScheduleEvent({.time = 42, .period = 0, .action = [](){Log(logging::Level::ERROR, "ERror");}});
 
     scheduler.Run(100);
 

@@ -9,6 +9,7 @@
 
 #include "IComponent.hpp"
 
+
 struct Event {
     uint64_t time{};
     uint64_t period{};
@@ -27,11 +28,15 @@ class Scheduler
     uint64_t CurrentTime();
     void AddComponent(IComponent *component);
     const std::set<IComponent*>& Components();
+    void ScheduleEvent(const Event event);
 
   private:
     uint64_t millis{0};
     std::priority_queue<Event, std::vector<Event>, CompareTime> events{};
     std::set<IComponent*> components;
 };
+
+// global instance
+inline Scheduler scheduler;
 
 #endif

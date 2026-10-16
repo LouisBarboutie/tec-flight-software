@@ -38,3 +38,7 @@ void Scheduler::AddComponent(IComponent *component)
 }
 
 const std::set<IComponent *> &Scheduler::Components() { return this->components; }
+
+void Scheduler::ScheduleEvent(const Event event){
+    this->events.push(event);
+}
