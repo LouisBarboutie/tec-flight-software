@@ -1,3 +1,6 @@
+#ifndef __SCHEDULER_HPP__
+#define __SCHEDULER_HPP__
+
 #include <cstdint>
 #include <queue>
 #include <set>
@@ -30,3 +33,5 @@ class Scheduler
     std::priority_queue<Event, std::vector<Event>, CompareTime> events{};
     std::set<IComponent*> components;
 };
+
+#endif
