@@ -1,15 +1,17 @@
 #include <cstdint>
 #include <iostream>
 #include <string_view>
+#include <format>
 
 #include "Scheduler.hpp"
+#include "Logger.hpp"
 
 class Component : public IComponent
 {
   public:
     Component(std::string_view name) { this->name = name;}
     uint64_t Period() override { return 10; }
-    void Step() override { std::clog << "Step! " << this->name << " " << this->steps++ << std::endl; }
+    void Step() override { logging::Log(logging::Level::INFO, std::format("{}: Step {} ", this->name, this->steps++)); }
     std::string_view Name() override { return this->name; }
 
   private:
@@ -19,6 +21,8 @@ class Component : public IComponent
 
 int main(void)
 {
+    logging::level = logging::Level::DEBUG;
+
     Scheduler scheduler;
     Component component1("Foo");
     Component component2("Bar");
@@ -29,7 +33,7 @@ int main(void)
 
     scheduler.Run(100);
 
-    std::clog << "Ran for " << scheduler.CurrentTime() << " milliseconds" << std::endl;
+    Log(logging::Level::INFO, std::format("Ran for {} milliseconds", scheduler.CurrentTime()));
 
     return 0;
 }
