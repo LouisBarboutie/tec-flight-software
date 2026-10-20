@@ -3,7 +3,8 @@
 
 #include "Fdir.hpp"
 #include "GenericComponent.hpp"
-#include "ISensor.hpp"
+#include "GnssSensor.hpp"
+#include "ImuSensor.hpp"
 
 #include <array>
 #include <cstdint>
@@ -17,11 +18,15 @@ class Processor : public GenericComponent
     void Step();
     uint64_t Period();
 
-    std::array<ISensor *, 3> imuSensors{};
-    std::array<ISensor *, 2> gnssSensors{};
+    std::array<ImuSensor*, 3> imuSensors{};
+    std::array<GnssSensor*, 2> gnssSensors{};
 
   private:
     Fdir fdir;
+    bool isImuDataAvailable{false};
+    bool isGnssDataAvailable{false};
+    std::vector<Measurement> imuMeasurements{};
+    std::vector<Measurement> gnssMeasurements{};
 };
 
 #endif

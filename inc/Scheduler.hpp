@@ -2,13 +2,14 @@
 #define __SCHEDULER_HPP__
 
 #include <cstdint>
+#include <functional>
 #include <queue>
 #include <set>
 #include <vector>
-#include <functional>
 
 #include "IComponent.hpp"
 
+constexpr uint64_t SECOND = 1'000;
 
 struct Event {
     uint64_t time{};
@@ -17,7 +18,7 @@ struct Event {
 };
 
 struct CompareTime {
-    bool operator()(const Event &a, const Event &b) const { return a.time > b.time; }
+    bool operator()(const Event& a, const Event& b) const { return a.time > b.time; }
 };
 
 class Scheduler
@@ -26,7 +27,7 @@ class Scheduler
     void Run(uint64_t millis);
     void Step();
     uint64_t CurrentTime();
-    void AddComponent(IComponent *component);
+    void AddComponent(IComponent* component);
     const std::set<IComponent*>& Components();
     void ScheduleEvent(const Event event);
 

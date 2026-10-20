@@ -3,6 +3,9 @@
 
 #include "GenericComponent.hpp"
 #include "ISensor.hpp"
+#include <cstdint>
+#include <optional>
+#include <queue>
 #include <string_view>
 
 class ImuSensor : public GenericComponent, public ISensor
@@ -15,7 +18,12 @@ class ImuSensor : public GenericComponent, public ISensor
 
     void InjectFailure() override;
     void ClearFailure() override;
-    void ReadData() override;
+
+    std::optional<Measurement> ReadData() override;
+
+  private:
+    std::queue<Measurement> measurements{};
+    bool failed{false};
 };
 
 #endif

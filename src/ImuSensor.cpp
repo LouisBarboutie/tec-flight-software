@@ -1,7 +1,12 @@
 #include "GenericComponent.hpp"
+#include "ISensor.hpp"
 #include "ImuSensor.hpp"
+#include "Scheduler.hpp"
 #include <cstdint>
+#include <optional>
 #include <string_view>
+
+extern Scheduler scheduler;
 
 constexpr uint64_t IMU_FREQUENCY_HZ = 100;
 
@@ -11,20 +16,37 @@ uint64_t ImuSensor::Period() { return 1'000 / IMU_FREQUENCY_HZ; }
 
 void ImuSensor::Step()
 {
+    if (this->failed) {
+        return;
+    }
+
     // TODO
+    this->measurements.push({
+        .timestamp = scheduler.CurrentTime(),
+        .data = Vec3(),
+    });
+
+    Log(logging::Level::DEBUG,
+        std::format("Generated measurement (x={}, y={}, z={})",
+                    this->measurements.back().data.x,
+                    this->measurements.back().data.y,
+                    this->measurements.back().data.z));
 }
 
 void ImuSensor::InjectFailure()
 {
-    // TODO
+    this->failed = true;
+    this->measurements = {}; // clear the queue
 }
 
-void ImuSensor::ClearFailure()
-{
-    // TODO
-}
+void ImuSensor::ClearFailure() { this->failed = false; }
 
-void ImuSensor::ReadData()
+std::optional<Measurement> ImuSensor::ReadData()
 {
-    // TODO
+    if (this->measurements.empty() || this->failed)
+        return std::nullopt;
+
+    Measurement measurement = this->measurements.front();
+    this->measurements.pop();
+    return measurement;
 }

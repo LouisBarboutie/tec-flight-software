@@ -1,4 +1,3 @@
-#include <cstdint>
 #include <format>
 #include <string_view>
 #include <unistd.h>
@@ -9,14 +8,16 @@
 #include "Processor.hpp"
 #include "Scheduler.hpp"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-    logging::level = logging::Level::INFO;
-
-    while (int opt = getopt(argc, argv, "d") != -1) {
+    int opt;
+    while ((opt = getopt(argc, argv, "d")) != -1) {
         switch (opt) {
         case 'd':
             logging::level = logging::Level::DEBUG;
+            break;
+        default:
+            logging::level = logging::Level::INFO;
         }
     }
 
