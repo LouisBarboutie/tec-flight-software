@@ -18,9 +18,17 @@ void GenericSensor::Step()
     Log(logging::Level::DEBUG, std::format("Generated measurement {}", this->measurements.back()));
 }
 
-void GenericSensor::InjectFailure() { this->failed = true; }
+void GenericSensor::InjectFailure()
+{
+    this->failed = true;
+    Log(logging::Level::INFO, "Sensor failed.");
+}
 
-void GenericSensor::ClearFailure() { this->failed = false; }
+void GenericSensor::ClearFailure()
+{
+    this->failed = false;
+    Log(logging::Level::INFO, "Sensor unfailed.");
+}
 
 std::optional<Measurement> GenericSensor::ReadData()
 {
