@@ -1,6 +1,5 @@
 #include "GenericComponent.hpp"
 
-#include <cstdint>
 #include <format>
 #include <string_view>
 

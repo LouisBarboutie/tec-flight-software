@@ -4,7 +4,6 @@
 #include "IComponent.hpp"
 #include "Logger.hpp"
 
-#include <cstdint>
 #include <string>
 #include <string_view>
 

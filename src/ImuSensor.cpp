@@ -4,7 +4,6 @@
 #include "Scheduler.hpp"
 
 #include <cstdint>
-#include <optional>
 #include <string_view>
 
 extern Scheduler scheduler;
