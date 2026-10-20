@@ -5,3 +5,4 @@ ColumnLimit: 120
 BinPackParameters: false
 BinPackArguments: false
 AlignAfterOpenBracket: Align
+PointerAlignment: Left
