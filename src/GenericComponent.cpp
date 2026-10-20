@@ -5,7 +5,7 @@
 
 GenericComponent::GenericComponent(std::string_view name) { this->name = name; }
 
-std::string_view GenericComponent::Name() { return this->name; }
+std::string_view GenericComponent::Name() const { return this->name; }
 
 void GenericComponent::Log(const logging::Level level, const std::string_view message)
 {

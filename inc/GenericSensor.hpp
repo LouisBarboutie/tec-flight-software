@@ -14,17 +14,19 @@ class GenericSensor : public GenericComponent, public ISensor
     GenericSensor(std::string_view name);
 
     void Step() override;
-    uint64_t Period() override;
+    uint64_t Period() const override;
 
     void InjectFailure() override;
     void ClearFailure() override;
 
     std::optional<Measurement> ReadData() override;
+    SensorId Id() const override;
 
   protected:
     std::queue<Measurement> measurements{};
     bool failed{false};
     uint64_t period{0};
+    uint8_t id{};
 
     virtual Measurement GenerateData() = 0;
 };

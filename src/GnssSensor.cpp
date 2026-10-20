@@ -11,4 +11,7 @@ constexpr uint64_t GNSS_FREQUENCY_HZ = 20;
 
 GnssSensor::GnssSensor(std::string_view name) : GenericSensor(name) { this->period = 1'000 / GNSS_FREQUENCY_HZ; }
 
-Measurement GnssSensor::GenerateData() { return Measurement{.timestamp = scheduler.CurrentTime(), .data = Vec3()}; }
+Measurement GnssSensor::GenerateData()
+{
+    return Measurement{.timestamp = scheduler.CurrentTime(), .id = this->id, .data = Vec3()};
+}

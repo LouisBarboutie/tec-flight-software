@@ -16,7 +16,9 @@ class Processor : public GenericComponent
     Processor(std::string_view name);
 
     void Step();
-    uint64_t Period();
+    uint64_t Period() const;
+
+    void Init();
 
     std::array<ImuSensor*, 3> imuSensors{};
     std::array<GnssSensor*, 2> gnssSensors{};

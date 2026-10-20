@@ -12,4 +12,7 @@ constexpr uint64_t IMU_FREQUENCY_HZ = 100;
 
 ImuSensor::ImuSensor(std::string_view name) : GenericSensor(name) { this->period = 1'000 / IMU_FREQUENCY_HZ; }
 
-Measurement ImuSensor::GenerateData() { return Measurement{.timestamp = scheduler.CurrentTime(), .data = Vec3()}; }
+Measurement ImuSensor::GenerateData()
+{
+    return Measurement{.timestamp = scheduler.CurrentTime(), .id = this->id, .data = Vec3()};
+}

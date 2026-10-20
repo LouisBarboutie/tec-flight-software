@@ -15,7 +15,7 @@ constexpr uint64_t PROCESSOR_FREQUENCY_HZ = 50;
 
 Processor::Processor(std::string_view name) : GenericComponent(name) { this->fdir = Fdir(); }
 
-uint64_t Processor::Period() { return 1'000 / PROCESSOR_FREQUENCY_HZ; }
+uint64_t Processor::Period() const { return 1'000 / PROCESSOR_FREQUENCY_HZ; }
 
 void Processor::Step()
 {
@@ -38,12 +38,12 @@ void Processor::Step()
 
     // Remove measurements that are older than one tick
     std::erase_if(this->imuMeasurements, [this](Measurement measurement) {
-        return measurement.timestamp >= scheduler.CurrentTime() - this->Period();
+        return scheduler.CurrentTime() - measurement.timestamp > this->Period();
     });
 
     // Remove measurements that are older than one second
     std::erase_if(this->gnssMeasurements, [this](Measurement measurement) {
-        return measurement.timestamp >= scheduler.CurrentTime() - 1 * SECOND;
+        return scheduler.CurrentTime() - measurement.timestamp > 1 * SECOND;
     });
 
     // Update data availability flags
@@ -51,4 +51,17 @@ void Processor::Step()
     this->isGnssDataAvailable = this->gnssMeasurements.size() > 0 ? true : false;
 
     // 3. Generate averages
+    // TODO
+
+    // 4. Run the FDIR
+
+    this->fdir.CheckSensors(imuMeasurements, gnssMeasurements);
+}
+
+void Processor::Init()
+{
+    for (const auto sensor : this->imuSensors)
+        this->fdir.AddMonitoredSensor(*sensor);
+    for (const auto sensor : this->gnssSensors)
+        this->fdir.AddMonitoredSensor(*sensor);
 }

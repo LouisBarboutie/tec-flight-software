@@ -11,7 +11,7 @@ class GenericComponent : public IComponent
 {
   public:
     GenericComponent(std::string_view name);
-    std::string_view Name() override;
+    std::string_view Name() const override;
 
   protected:
     std::string name;

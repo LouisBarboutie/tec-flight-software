@@ -1,13 +1,13 @@
 [
 {
   "directory": "/home/louis/Projects/tec-flight-software",
-  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc -std=gnu++20 -o CMakeFiles/TecFlightSoftware.dir/src/Scheduler.cpp.o -c /home/louis/Projects/tec-flight-software/src/Scheduler.cpp",
+  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc -std=gnu++23 -o CMakeFiles/TecFlightSoftware.dir/src/Scheduler.cpp.o -c /home/louis/Projects/tec-flight-software/src/Scheduler.cpp",
   "file": "/home/louis/Projects/tec-flight-software/src/Scheduler.cpp",
   "output": "CMakeFiles/TecFlightSoftware.dir/src/Scheduler.cpp.o"
 },
 {
   "directory": "/home/louis/Projects/tec-flight-software",
-  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc -std=gnu++20 -o CMakeFiles/TecFlightSoftware.dir/src/main.cpp.o -c /home/louis/Projects/tec-flight-software/src/main.cpp",
+  "command": "/usr/sbin/c++  -I/home/louis/Projects/tec-flight-software/inc -std=gnu++23 -o CMakeFiles/TecFlightSoftware.dir/src/main.cpp.o -c /home/louis/Projects/tec-flight-software/src/main.cpp",
   "file": "/home/louis/Projects/tec-flight-software/src/main.cpp",
   "output": "CMakeFiles/TecFlightSoftware.dir/src/main.cpp.o"
 }

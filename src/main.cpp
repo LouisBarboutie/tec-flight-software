@@ -22,10 +22,11 @@ int main(int argc, char* argv[])
         switch (opt) {
         case 'd':
             logging::level = logging::Level::DEBUG;
+            continue;
         case 's':
             scenario = std::atoi(optarg);
             Log(logging::Level::INFO, std::format("Selected scenario {}", scenario));
-            break;
+            continue;
         }
     }
 
@@ -61,6 +62,8 @@ void Scenario1()
     processor.gnssSensors[0] = &gnss1;
     processor.gnssSensors[1] = &gnss2;
 
+    processor.Init();
+
     scheduler.AddComponent(&processor);
     scheduler.AddComponent(&imu1);
     scheduler.AddComponent(&imu2);
@@ -84,6 +87,8 @@ void Scenario2()
 
     processor.gnssSensors[0] = &gnss1;
     processor.gnssSensors[1] = &gnss2;
+
+    processor.Init();
 
     scheduler.AddComponent(&processor);
     scheduler.AddComponent(&imu1);
@@ -112,6 +117,8 @@ void Scenario3()
 
     processor.gnssSensors[0] = &gnss1;
     processor.gnssSensors[1] = &gnss2;
+
+    processor.Init();
 
     scheduler.AddComponent(&processor);
     scheduler.AddComponent(&imu1);

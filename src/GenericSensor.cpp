@@ -1,12 +1,17 @@
 #include "GenericSensor.hpp"
 
+#include "ISensor.hpp"
 #include "Scheduler.hpp"
 
 extern Scheduler scheduler;
 
-GenericSensor::GenericSensor(std::string_view name) : GenericComponent(name) {}
+GenericSensor::GenericSensor(std::string_view name) : GenericComponent(name)
+{
+    static uint8_t _id;
+    this->id = ++_id;
+}
 
-uint64_t GenericSensor::Period() { return this->period; }
+uint64_t GenericSensor::Period() const { return this->period; }
 
 void GenericSensor::Step()
 {
@@ -39,3 +44,5 @@ std::optional<Measurement> GenericSensor::ReadData()
     this->measurements.pop();
     return measurement;
 }
+
+SensorId GenericSensor::Id() const { return this->id; }

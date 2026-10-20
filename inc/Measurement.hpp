@@ -12,6 +12,7 @@ struct Vec3 {
 
 struct Measurement {
     uint64_t timestamp{};
+    uint8_t id{};
     Vec3 data{};
 };
 
@@ -20,7 +21,8 @@ template <> struct std::formatter<Measurement> : std::formatter<std::string_view
     {
         std::string temp;
         std::format_to(std::back_inserter(temp),
-                       "(t={}, x={}, y={}, z={})",
+                       "(id={}, t={}, x={}, y={}, z={})",
+                       measurement.id,
                        measurement.timestamp,
                        measurement.data.x,
                        measurement.data.y,
