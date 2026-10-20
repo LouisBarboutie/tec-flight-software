@@ -13,8 +13,6 @@ class GenericComponent : public IComponent
   public:
     GenericComponent(std::string_view name);
     std::string_view Name() override;
-    virtual void Step();
-    virtual uint64_t Period();
 
   protected:
     std::string name;

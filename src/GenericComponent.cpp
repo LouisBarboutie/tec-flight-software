@@ -12,14 +12,3 @@ void GenericComponent::Log(const logging::Level level, const std::string_view me
 {
     logging::Log(level, std::format("{}: {}", this->name, message));
 }
-
-void GenericComponent::Step()
-{
-    // To be implemented by derived class
-}
-
-uint64_t GenericComponent::Period()
-{
-    // To be implemented by derived class
-    return 0;
-}
