@@ -1,23 +1,21 @@
-#include <format>
-#include <string_view>
-#include <unistd.h>
-
 #include "GnssSensor.hpp"
 #include "ImuSensor.hpp"
 #include "Logger.hpp"
 #include "Processor.hpp"
 #include "Scheduler.hpp"
 
+#include <format>
+#include <string_view>
+#include <unistd.h>
+
 int main(int argc, char* argv[])
 {
+    logging::level = logging::Level::INFO;
     int opt;
     while ((opt = getopt(argc, argv, "d")) != -1) {
         switch (opt) {
         case 'd':
             logging::level = logging::Level::DEBUG;
-            break;
-        default:
-            logging::level = logging::Level::INFO;
         }
     }
 

@@ -1,13 +1,12 @@
+#include "Processor.hpp"
+
 #include "Fdir.hpp"
 #include "GenericComponent.hpp"
 #include "ImuSensor.hpp"
-#include "Processor.hpp"
 #include "Scheduler.hpp"
 
 #include <cstdint>
 #include <optional>
-#include <queue>
-#include <ranges>
 #include <string_view>
 
 extern Scheduler scheduler;

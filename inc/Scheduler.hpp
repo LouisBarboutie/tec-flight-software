@@ -1,13 +1,13 @@
 #ifndef __SCHEDULER_HPP__
 #define __SCHEDULER_HPP__
 
+#include "IComponent.hpp"
+
 #include <cstdint>
 #include <functional>
 #include <queue>
 #include <set>
 #include <vector>
-
-#include "IComponent.hpp"
 
 constexpr uint64_t SECOND = 1'000;
 

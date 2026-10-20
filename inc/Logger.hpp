@@ -2,10 +2,10 @@
 #define __LOGGER_HPP__
 
 #include "Scheduler.hpp"
+
 #include <format>
 #include <iostream>
 #include <string_view>
-
 
 namespace logging
 {
@@ -54,7 +54,9 @@ inline void Log(Level level, std::string_view message)
     if (logging::level < level)
         return;
 
-    std::cout << std::format("{}{:06d} [{}] {}\033[0m", color(level), scheduler.CurrentTime(), name(level), message) << std::endl;;
+    std::cout << std::format("{}{:06d} [{}] {}\033[0m", color(level), scheduler.CurrentTime(), name(level), message)
+              << std::endl;
+    ;
 };
 
 } // namespace logging

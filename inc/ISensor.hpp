@@ -1,19 +1,9 @@
 #ifndef __ISENSOR_HPP__
 #define __ISENSOR_HPP__
 
-#include <cstdint>
+#include "Measurement.hpp"
+
 #include <optional>
-
-struct Vec3 {
-    int32_t x{};
-    int32_t y{};
-    int32_t z{};
-};
-
-struct Measurement {
-    uint64_t timestamp{};
-    Vec3 data{};
-};
 
 class ISensor
 {
