@@ -2,7 +2,7 @@
 
 ## Overview
 
-[Architecture Overview](./architecture.svg)
+![Architecture Overview](./architecture.svg)
 
 ## Build
 
