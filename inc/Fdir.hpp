@@ -2,19 +2,17 @@
 #define __FDIR_HPP__
 
 #include "GenericSensor.hpp"
-#include "Measurement.hpp"
+#include "ISensor.hpp"
 
 #include <cstdint>
 #include <unordered_map>
-#include <vector>
 
 class Fdir
 {
   public:
     void AddMonitoredSensor(const GenericSensor& sensor);
-    void CheckOutput(bool availableImuData, bool availableGnssData);
-    void CheckSensors(const std::vector<Measurement>& imuMeasurements,
-                      const std::vector<Measurement>& gnssMeasurements);
+    void CheckSensors();
+    void PetTheDog(SensorId id);
 
   private:
     struct RegisteredSensor {

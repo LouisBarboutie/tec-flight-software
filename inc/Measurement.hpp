@@ -1,13 +1,9 @@
 #ifndef __MEASUREMENT_HPP__
 #define __MEASUREMENT_HPP__
 
-#include <format>
+#include "Vec3.hpp"
 
-struct Vec3 {
-    double x{};
-    double y{};
-    double z{};
-};
+#include <format>
 
 struct Measurement {
     uint64_t timestamp{};

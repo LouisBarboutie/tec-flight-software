@@ -4,6 +4,7 @@
 #include "GenericComponent.hpp"
 #include "ImuSensor.hpp"
 #include "Scheduler.hpp"
+#include "Vec3.hpp"
 
 #include <cstdint>
 #include <optional>
@@ -25,12 +26,14 @@ void Processor::Step()
     for (const auto imu : this->imuSensors) {
         while (std::optional<Measurement> measurement = imu->ReadData()) {
             this->imuMeasurements.push_back(measurement.value());
+            this->fdir.PetTheDog(imu->Id());
         }
     }
 
     for (const auto gnss : this->gnssSensors) {
         while (std::optional<Measurement> measurement = gnss->ReadData()) {
             this->gnssMeasurements.push_back(measurement.value());
+            this->fdir.PetTheDog(gnss->Id());
         }
     }
 
@@ -51,11 +54,13 @@ void Processor::Step()
     this->isGnssDataAvailable = this->gnssMeasurements.size() > 0 ? true : false;
 
     // 3. Generate averages
-    // TODO
+
+    Vec3 imuMean = ComputeAverage(this->imuMeasurements);
+    Vec3 gnssMean = ComputeAverage(this->gnssMeasurements);
 
     // 4. Run the FDIR
 
-    this->fdir.CheckSensors(imuMeasurements, gnssMeasurements);
+    this->fdir.CheckSensors();
 }
 
 void Processor::Init()
@@ -64,4 +69,15 @@ void Processor::Init()
         this->fdir.AddMonitoredSensor(*sensor);
     for (const auto sensor : this->gnssSensors)
         this->fdir.AddMonitoredSensor(*sensor);
+}
+
+Vec3 Processor::ComputeAverage(const std::vector<Measurement>& measurements)
+{
+    Vec3 mean{};
+    for (const auto& measurement : measurements) {
+        mean = mean + measurement.data;
+    }
+    mean = (1 / static_cast<double>(this->gnssMeasurements.size())) * mean;
+    Log(logging::Level::DEBUG, std::format("{}", mean));
+    return mean;
 }

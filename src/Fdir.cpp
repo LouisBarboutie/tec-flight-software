@@ -3,7 +3,6 @@
 #include "Logger.hpp"
 #include "Scheduler.hpp"
 
-#include <algorithm>
 #include <cstdint>
 #include <ranges>
 
@@ -15,20 +14,8 @@ void Fdir::AddMonitoredSensor(const GenericSensor& sensor)
     logging::Log(logging::Level::INFO, std::format("Registered sensor {} with id {}", sensor.Name(), sensor.Id()));
 }
 
-void Fdir::CheckOutput(bool availableImuData, bool availableGnssData) {}
-
-void Fdir::CheckSensors(const std::vector<Measurement>& imuMeasurements,
-                        const std::vector<Measurement>& gnssMeasurements)
-
+void Fdir::CheckSensors()
 {
-    // 1. Update the latest time stamps
-    for (const auto* batch : {&imuMeasurements, &gnssMeasurements}) {
-        for (const Measurement& m : *batch) {
-            if (auto it = registeredSensors.find(m.id); it != registeredSensors.end())
-                it->second.lastTimeStamp = std::max(it->second.lastTimeStamp, m.timestamp);
-        }
-    }
-
     // 2. Check that all latest timestamps are within one acquisition period
     for (auto& [id, sensor] : this->registeredSensors) {
         uint64_t diff = scheduler.CurrentTime() - sensor.lastTimeStamp;
@@ -45,4 +32,14 @@ void Fdir::CheckSensors(const std::vector<Measurement>& imuMeasurements,
 
         sensor.alarm = silent;
     }
+}
+
+void Fdir::PetTheDog(SensorId id)
+{
+    if (!this->registeredSensors.contains(id)) {
+        Log(logging::Level::WARNING, std::format("Cannot pet the dog for unregistered sensor with id {}", id));
+        return;
+    }
+
+    this->registeredSensors[id].lastTimeStamp = scheduler.CurrentTime();
 }

@@ -29,6 +29,7 @@ class Processor : public GenericComponent
     bool isGnssDataAvailable{false};
     std::vector<Measurement> imuMeasurements{};
     std::vector<Measurement> gnssMeasurements{};
+    Vec3 ComputeAverage(const std::vector<Measurement>& measurements);
 };
 
 #endif

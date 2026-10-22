@@ -4,6 +4,7 @@
 #include "Scheduler.hpp"
 
 #include <format>
+#include <fstream>
 #include <iostream>
 #include <string_view>
 
@@ -18,6 +19,7 @@ enum class Level {
 };
 
 inline Level level;
+inline std::ofstream logfile;
 
 constexpr std::string_view color(Level level)
 {
@@ -54,9 +56,13 @@ inline void Log(Level level, std::string_view message)
     if (logging::level < level)
         return;
 
-    std::cout << std::format("{}{:06d} [{}] {}\033[0m", color(level), scheduler.CurrentTime(), name(level), message)
-              << std::endl;
-    ;
+    if (!logfile.is_open())
+        logfile.open("log.txt");
+
+    std::string line =
+        std::format("{}{:06d} [{}] {}\033[0m", color(level), scheduler.CurrentTime(), name(level), message);
+    std::cout << line << std::endl;
+    logfile << line << std::endl;
 };
 
 } // namespace logging
