@@ -1,13 +1,12 @@
 #ifndef __MEASUREMENT_HPP__
 #define __MEASUREMENT_HPP__
 
-#include <cstdint>
 #include <format>
 
 struct Vec3 {
-    int32_t x{};
-    int32_t y{};
-    int32_t z{};
+    double x{};
+    double y{};
+    double z{};
 };
 
 struct Measurement {
